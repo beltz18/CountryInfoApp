@@ -37,7 +37,7 @@ export async function fetchCountryData() {
       return {
         name,
         countryCode,
-        flag: flagInfo?.flag || 'No disponible',
+        flag: flagInfo?.flag || 'no',
         borders: bordersResponse.data.borders || [],
         population: populationInfo?.populationCounts || []
       }
@@ -47,7 +47,7 @@ export async function fetchCountryData() {
 
     return countriesData
   } catch (err) {
-    console.error('Error al obtener los datos de los países:', err.cause)
+    console.error('Error when trying to get countries data:', err.cause)
     return []
   }
 }
