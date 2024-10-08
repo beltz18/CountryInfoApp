@@ -70,7 +70,7 @@ const pageIndex = () : React.JSX.Element => {
                 <Featured
                   icon={<BarChart className="h-6 w-6 text-purple-500" />}
                   title="Key Statistics"
-                  description="View important demographic and economic statistics at a glance."
+                  description="View important demographic statistics at a glance."
                 />
               </div>
             </CardContent>
