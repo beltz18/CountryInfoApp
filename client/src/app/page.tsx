@@ -1,20 +1,19 @@
 import React from 'react'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import CardsContainer from '@c/CardsContainer'
 import CountryInfo from '@c/CountryInfo'
 import Header from '@c/Header'
 import Layout from '@c/Layout'
-import SearchCountry from '@c/SearchCountry'
 import { Button, CardFooter } from '@c/ui-components'
 import { Globe } from 'lucide-react'
 import { loadCountriesData } from '@l/serverActions'
 
+const SearchCountry = dynamic(() => import('@c/SearchCountry'), { ssr: false })
+
 const pageIndex = async () => {
-  try {
-    await loadCountriesData()
-  } catch (err) {
-    false
-  }
+  try { await loadCountriesData() }
+  catch (err) { false }
   
   return (
     <>

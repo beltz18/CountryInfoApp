@@ -1,11 +1,18 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useRouter }       from 'next/navigation'
 import { Button }          from '@c/ui-components'
 import { SearchIcon }      from 'lucide-react'
 
 const SearchCountry = () : React.JSX.Element => {
+  const router = useRouter()
   const [countryName, setCountryName] = useState<string>("")
+
+  const handleSearch = () => {
+    if (countryName.trim())
+      router.push(`/country/${countryName}`)
+  }
 
   return (
     <>
@@ -20,7 +27,7 @@ const SearchCountry = () : React.JSX.Element => {
         <Button
           size="sm"
           className="bg-blue-600 hover:bg-blue-700 text-white flex"
-          onClick={() => console.log(countryName)}
+          onClick={ handleSearch }
         >
           <SearchIcon className="sm:mr-2 h-5 w-5" />
           <span className='hidden sm:block'>Search</span>

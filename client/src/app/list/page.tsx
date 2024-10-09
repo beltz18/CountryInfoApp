@@ -19,7 +19,6 @@ const pageList = async () => {
         <div className="min-h-screen flex items-center justify-center">
           <Layout>
             <Header />
-
             <CountriesList data={ data } />
           </Layout>
         </div>
