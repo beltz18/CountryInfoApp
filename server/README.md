@@ -1,4 +1,4 @@
-# CountryInfo App - Client
+# CountryInfo App - Server
 
 ## Getting Started
 

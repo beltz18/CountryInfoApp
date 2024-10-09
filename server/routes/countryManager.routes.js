@@ -81,7 +81,6 @@ countryManager.get('/country/:name', async (req, res) => {
     const dataJson = JSON.parse(dataText)
 
     const dataDesired = dataJson.find(el => el.name.toLowerCase() === name.toLowerCase())
-    console.log(dataDesired)
 
     response['status']  = true
     response['message'] = 'retrieved country data'
