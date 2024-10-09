@@ -1,4 +1,4 @@
-import { Router } from "express"
+import { response, Router } from "express"
 import fs         from 'fs'
 import { join }   from "path"
 import * as v     from '../global/var.js'
@@ -47,9 +47,14 @@ countryManager.get('/', async (req, res) => {
 countryManager.get('/available', async (req, res) => {
   const response = { ...defaultResponse }
 
-  if (!fs.existsSync(filePath))
-    fs.writeFileSync(filePath, JSON.stringify([]))
-  else {
+  if (!fs.existsSync(filePath)) {
+    const r = await fetchCountryData()
+    if (r.length > 0) {
+      response['message'] = 'cached data'
+      response['data'] = r
+      fs.writeFileSync(filePath, JSON.stringify(r))
+    }
+  } else {
     const dataText = fs.readFileSync(filePath, 'utf-8')
     const dataJson = JSON.parse(dataText)
     response['status']  = true
@@ -60,10 +65,30 @@ countryManager.get('/available', async (req, res) => {
   res.status(response['code']).json(response)
 })
 
-countryManager.get('/country/:name', (req, res) => {
+countryManager.get('/country/:name', async (req, res) => {
   const { name } = req.params
+  const response = { ...defaultResponse }
 
-  res.json({ message: 'ping' })
+  if (!fs.existsSync(filePath)) {
+    const r = await fetchCountryData()
+    if (r.length > 0) {
+      response['message'] = 'cached data'
+      response['data'] = r
+      fs.writeFileSync(filePath, JSON.stringify(r))
+    }
+  } else {
+    const dataText = fs.readFileSync(filePath, 'utf-8')
+    const dataJson = JSON.parse(dataText)
+
+    const dataDesired = dataJson.find(el => el.name.toLowerCase() === name.toLowerCase())
+    console.log(dataDesired)
+
+    response['status']  = true
+    response['message'] = 'retrieved country data'
+    response['data']    = dataDesired || []
+  }
+
+  res.status(response['code']).json(response)
 })
 
 export default countryManager

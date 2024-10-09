@@ -1,9 +1,7 @@
 import React from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
 import Header from '@c/Header'
 import Layout from '@c/Layout'
-import { Card, CardContent } from '@c/ui-components'
+import CountriesList from '@c/CountriesList'
 import {
   loadCountriesData,
   getCountriesData,
@@ -15,44 +13,14 @@ const pageList = async () => {
   try {
     const r = await getCountriesData()
     let data = r?.data?.data
-    console.log(data)
 
     return (
       <>
         <div className="min-h-screen flex items-center justify-center">
           <Layout>
             <Header />
-            
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 bg-white p-4 rounded-md">
-              {
-                data.map((country: any) => (
-                  <Link
-                    href={`/country/${country.name.toLowerCase()}`}
-                    key={country.name}
-                  >
-                    <Card className="hover:shadow-lg transition-shadow duration-200 h-[100px] flex gap-2 items-center">
-                      <CardContent className="p-4">
-                        <div className="flex items-center space-x-4">
-                          
-                              <Image
-                                src={ country.flag != 'no' ? country.flag : '/no.jpg' }
-                                alt='flag'
-                                width={50}
-                                height={50}
-                              />
-                            
-                          
 
-                          <div>
-                            <h2 className="font-semibold text-lg">{country.name}</h2>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                ))
-              }
-            </div>
+            <CountriesList data={ data } />
           </Layout>
         </div>
       </>

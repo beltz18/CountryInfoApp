@@ -10,7 +10,11 @@ import { Globe } from 'lucide-react'
 import { loadCountriesData } from '@l/serverActions'
 
 const pageIndex = async () => {
-  await loadCountriesData()
+  try {
+    await loadCountriesData()
+  } catch (err) {
+    false
+  }
   
   return (
     <>
