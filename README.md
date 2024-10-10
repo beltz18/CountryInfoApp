@@ -1,6 +1,8 @@
 # CountryInfo App
 
-***CountryInfo*** is a **Next.js/Node.js** application developed as part of an assessment for ***DevelopsToday***.
+***CountryInfo*** is a **Next.js/Node.js**
+
+The app offers users an interactive interface to explore data such as population, area, language and more. It includes filtering features and is designed to be responsive across all devices.
 
 The **client** folder contains the ***Next.js app***, which runs on port 3000.
 
